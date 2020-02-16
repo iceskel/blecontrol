@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function Connect(props: any) {
   const [charvalue, setcharvalue] = useState<any>(null);
   const [ngage, setngage] = useState<any>(null);
-  const [funky, setfunky] = useState<any>(undefined);
+  const funky = useRef({} as any);
   let char = undefined as any;
 
   useEffect(() => {
@@ -20,13 +20,13 @@ function Connect(props: any) {
   
       char = await service.getCharacteristic(0x2A19);
       console.log('bluetooth found');
-      setfunky(char);
+      funky.current = char;
     }
     getChar();
   }, [ngage]);
 
-  if (funky) {
-    funky.readValue().then((val: any) => {
+  if (funky && funky.current) {
+    funky.current.readValue().then((val: any) => {
       setcharvalue(val.getUint8(0));
     });
   }
