@@ -10,7 +10,6 @@ function Connect(props: any) {
     const { target } = event;
 
     const val = target.value.getUint8(0);
-    console.log('event ' + val);
     setcharvalue(val);
   }, []);
 
@@ -26,13 +25,12 @@ function Connect(props: any) {
   
       const char = await service.getCharacteristic(0x2A19);
       console.log('bluetooth found');
-      await char.readValue();
+      char.startNotifications();
       char.addEventListener("characteristicvaluechanged", handleValueChange);
     }
     getChar();
   }, [ngage]);
 
-  console.log('char val ' + charvalue);
 
   return (
     <div>
