@@ -18,6 +18,7 @@ function Connect(props: any) {
   
       const char = await service.getCharacteristic(0x2A19);
       console.log('bluetooth found');
+      await char.readValue();
       char.addEventListener("characteristicvaluechanged", (evt: any) => setcharvalue(evt.target.current.value.getUint8(0)));
     }
     getChar();
