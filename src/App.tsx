@@ -12,9 +12,9 @@ function Connect(props: any) {
         console.log('bnluetooth not found');
         return;
       }
-      const service = await navigator.bluetooth.requestDevice({ filters: [{ services: ['19B10000-E8F2-537E-4F6C-D104768A1214']}]})
+      const service = await navigator.bluetooth.requestDevice({ filters: [{ services: ['0x667788']}]})
       .then((device: BluetoothDevice) => device.gatt ? device.gatt.connect() : Promise.reject(("undefined")))
-      .then((server: BluetoothRemoteGATTServer) => server.getPrimaryService('19B10000-E8F2-537E-4F6C-D104768A1214'));
+      .then((server: BluetoothRemoteGATTServer) => server.getPrimaryService('0x667788'));
   
       const char = await service.getCharacteristic("2A19");
       const value = await char.readValue();
