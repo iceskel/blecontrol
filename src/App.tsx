@@ -5,8 +5,7 @@ import './App.css';
 function Connect(props: any) {
   const [charvalue, setcharvalue] = useState<any>(null);
   const [ngage, setngage] = useState<any>(null);
-  const funky = useRef({} as any);
-  let char = undefined as any;
+  const funky = useRef<any>(null);
 
   useEffect(() => {
     async function getChar() {
@@ -18,7 +17,7 @@ function Connect(props: any) {
       .then((device: BluetoothDevice) => device.gatt ? device.gatt.connect() : Promise.reject(("undefined")))
       .then((server: BluetoothRemoteGATTServer) => server.getPrimaryService('19b10000-e8f2-537e-4f6c-d104768a1214'));
   
-      char = await service.getCharacteristic(0x2A19);
+      const char = await service.getCharacteristic(0x2A19);
       console.log('bluetooth found');
       funky.current = char;
     }
