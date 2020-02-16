@@ -1,10 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function Connect(props: any) {
   const [charvalue, setcharvalue] = useState<any>(null);
   const [ngage, setngage] = useState<any>(null);
+
+  const handleValueChange = useCallback((event: any) => {
+    const { target } = event;
+
+    const val = target.value.getUint8(0);
+    console.log('event ' + val);
+    setcharvalue(val);
+  }, []);
 
   useEffect(() => {
     async function getChar() {
@@ -19,11 +27,7 @@ function Connect(props: any) {
       const char = await service.getCharacteristic(0x2A19);
       console.log('bluetooth found');
       await char.readValue();
-      char.addEventListener("characteristicvaluechanged", (evt: any) => {
-        const val = evt.target.current.value.getUint8(0);
-        console.log('event ' + val);
-        setcharvalue(val);
-      });
+      char.addEventListener("characteristicvaluechanged", handleValueChange);
     }
     getChar();
   }, [ngage]);
