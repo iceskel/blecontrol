@@ -9,16 +9,16 @@ function Connect(props: any) {
   useEffect(() => {
     async function getChar() {
       if (!navigator.bluetooth) {
-        console.log('bnluetooth not found');
+        console.log('bluetooth not found');
         return;
       }
-      const service = await navigator.bluetooth.requestDevice({ filters: [{ services: ['0x180F']}]})
+      const service = await navigator.bluetooth.requestDevice({ filters: [{ services: ['19b10000-e8f2-537e-4f6c-d104768a1214']}]})
       .then((device: BluetoothDevice) => device.gatt ? device.gatt.connect() : Promise.reject(("undefined")))
-      .then((server: BluetoothRemoteGATTServer) => server.getPrimaryService('0x180F'));
+      .then((server: BluetoothRemoteGATTServer) => server.getPrimaryService('19b10000-e8f2-537e-4f6c-d104768a1214'));
   
-      const char = await service.getCharacteristic("2A19");
+      const char = await service.getCharacteristic("2a19");
       const value = await char.readValue();
-      console.log('bluietooth found');
+      console.log('bluetooth found');
       setcharvalue(value);
     }
     getChar();
