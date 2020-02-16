@@ -3,13 +3,13 @@ import logo from './logo.svg';
 import './App.css';
 
 function Connect(props: any) {
-  const [charvalue, setcharvalue] = useState<any>(null);
+  const [charvalue, setcharvalue] = useState<any>(0.0);
   const [ngage, setngage] = useState<any>(null);
 
   const handleValueChange = useCallback((event: any) => {
     const { target } = event;
 
-    const val = target.value.getUint8(0);
+    const val = target.value.getFloat32(0);
     setcharvalue(val);
   }, []);
 
