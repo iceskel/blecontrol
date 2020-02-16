@@ -16,7 +16,7 @@ function Connect(props: any) {
       .then((device: BluetoothDevice) => device.gatt ? device.gatt.connect() : Promise.reject(("undefined")))
       .then((server: BluetoothRemoteGATTServer) => server.getPrimaryService('19b10000-e8f2-537e-4f6c-d104768a1214'));
   
-      const char = await service.getCharacteristic("2a19");
+      const char = await service.getCharacteristic(0x2A19);
       const value = await char.readValue();
       console.log('bluetooth found');
       setcharvalue(value);
