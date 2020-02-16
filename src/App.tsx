@@ -5,7 +5,6 @@ import './App.css';
 function Connect(props: any) {
   const [charvalue, setcharvalue] = useState<any>(null);
   const [ngage, setngage] = useState<any>(null);
-  const funky = useRef<any>(null);
 
   useEffect(() => {
     async function getChar() {
@@ -19,16 +18,10 @@ function Connect(props: any) {
   
       const char = await service.getCharacteristic(0x2A19);
       console.log('bluetooth found');
-      funky.current = char;
+      char.addEventListener("characteristicvaluechanged", (evt: any) => setcharvalue(evt.target.current.value.getUint8(0)));
     }
     getChar();
   }, [ngage]);
-
-  if (funky && funky.current) {
-    funky.current.readValue().then((val: any) => {
-      setcharvalue(val.getUint8(0));
-    });
-  }
 
   return (
     <div>
