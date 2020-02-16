@@ -19,7 +19,7 @@ function Connect(props: any) {
       const char = await service.getCharacteristic(0x2A19);
       const value = await char.readValue();
       console.log('bluetooth found');
-      setcharvalue(value);
+      setcharvalue(value.getUint8(0));
     }
     getChar();
   }, [ngage]);
