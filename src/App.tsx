@@ -32,6 +32,8 @@ function Connect(props: any) {
   }, [ngage]);
 
 
+  console.log('goforce: ' + charvalue);
+
   return (
     <div>
       value: {charvalue}
