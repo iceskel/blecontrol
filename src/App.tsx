@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Graph from './components/Graph';
 
 function Connect(props: any) {
   const [charvalue, setcharvalue] = useState<any>(0.0);
@@ -29,7 +30,7 @@ function Connect(props: any) {
       char.addEventListener("characteristicvaluechanged", handleValueChange);
     }
     getChar();
-  }, [ngage]);
+  }, [ngage, handleValueChange]);
 
 
   console.log('goforce: ' + charvalue);
@@ -47,6 +48,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <Graph x={-1.1} y={-3} />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
