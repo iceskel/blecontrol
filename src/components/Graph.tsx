@@ -1,5 +1,5 @@
 import React from 'react';
-import { VictoryAxis, VictoryTheme, VictoryScatter, VictoryChart } from 'victory';
+import { VictoryTheme, VictoryScatter, VictoryChart } from 'victory';
 
 type Domain = [number, number];
 

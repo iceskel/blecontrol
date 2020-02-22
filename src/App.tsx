@@ -10,8 +10,8 @@ function Connect(props: any) {
   const handleValueChange = useCallback((event: any) => {
     const { target } = event;
 
-    const val = target.value.getFloat32(0);
-    setcharvalue(val);
+    const val = target.value.getFloat32(0, true) * 100;
+    setcharvalue(val/9.8);
   }, []);
 
   useEffect(() => {
@@ -36,10 +36,10 @@ function Connect(props: any) {
   console.log('goforce: ' + charvalue);
 
   return (
-    <div>
-      value: {charvalue}
+    <>
       <button onClick={() => setngage(Math.random() * 5)}>lmao</button>
-    </div>
+      <Graph x={0} y={charvalue} />
+    </>
   )
 }
 
@@ -48,7 +48,6 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Graph x={-1.1} y={-3} />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
